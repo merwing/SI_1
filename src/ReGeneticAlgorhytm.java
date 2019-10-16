@@ -4,14 +4,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
-//TODO
-/*
- * tournament -> zwracanie silniejszego z osobnikow
- * score i weight
- * cross
- * mutate
-*/
-
 public class ReGeneticAlgorhytm 
 {
 	private int iterations, max_capacity, pop_size;
@@ -64,7 +56,6 @@ public class ReGeneticAlgorhytm
 			}
 		}
 		rs.setBp_score(main_score);
-		
 	}
 	
 	public void calculateWeight(ReSolution rs)

@@ -9,7 +9,8 @@ public class Main
 	public static void main(String[]Args) throws Exception
 	{
 		item_list = new ArrayList<>();
-		File file = new File("C:/Users/Administrator/Downloads/jednoplecakowy/p08.csv");
+//		File file = new File("C:/Users/Administrator/Downloads/single/p08.csv");
+		File file = new File("C:/kuba/java/workspace/re_SI_1/single/p08.csv");
 		ReLoader rl = new ReLoader(file);
 		rl.loadItems(file, item_list);
 		int max_capacity = rl.loadMaxCapacity(file);
