@@ -43,14 +43,12 @@ public class ReSolution
 		System.out.println("");
 	}
 	
-	public void mutate(double pm)
+	public void mutate2(double pm)
 	{
-		double prob_mut;
-		
-		for(int i = 0; i < backpack.length; i++)
+		double prob_mut = (random.nextInt(101)/100); //0->100/100
+		if(prob_mut <= pm)
 		{
-			prob_mut = (random.nextInt(101)/100); //0->100/100
-			if(prob_mut <= pm)
+			for(int i = 0; i < backpack.length; i++) 
 			{
 				if(backpack[i] == 1)
 				{
@@ -63,6 +61,27 @@ public class ReSolution
 			}
 		}
 	}
+	
+//	public void mutate(double pm)
+//	{
+//		double prob_mut;
+//		
+//		for(int i = 0; i < backpack.length; i++)
+//		{
+//			prob_mut = (random.nextInt(101)/100); //0->100/100
+//			if(prob_mut <= pm)
+//			{
+//				if(backpack[i] == 1)
+//				{
+//					backpack[i] = 0;
+//				}
+//				else
+//				{
+//					backpack[i] = 1;
+//				}
+//			}
+//		}
+//	}
 	
 	public void cross(ReSolution s)
 	{

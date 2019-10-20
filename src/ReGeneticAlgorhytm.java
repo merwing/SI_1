@@ -85,20 +85,21 @@ public class ReGeneticAlgorhytm
 	{
 		int index_1 = random.nextInt(old_pop.size());
 		int index_2 = random.nextInt(old_pop.size());
+//		int index_3 = random.nextInt(old_pop.size());
 		
 		ReSolution rs1 = old_pop.get(index_1);
 		ReSolution rs2 = old_pop.get(index_2);
 		
-//		return (rs1.getBp_score() >= rs2.getBp_score() ? rs1 : rs2);
-		if(rs1.getBp_score() >= rs2.getBp_score())
-		{
-			return rs1;
-		}
-		else
-		{
-			return rs2;
-		}
-	}
+		return (rs1.getBp_score() >= rs2.getBp_score() ? rs1 : rs2);}
+//		if(rs1.getBp_score() >= rs2.getBp_score())
+//		{
+//			return rs1;
+//		}
+//		else
+//		{
+//			return rs2;
+//		}
+//	}
 	
 	public int bestScore(ArrayList<ReSolution> pop) 
 	{
@@ -113,11 +114,34 @@ public class ReGeneticAlgorhytm
 		return best_score;
 	}
 	
+	public int worstScore(ArrayList<ReSolution> pop)
+	{
+		int worst_score = 0;
+		for(ReSolution rs : pop)
+		{
+			if(rs.getBp_score() <= worst_score)
+			{
+				worst_score = rs.getBp_score();
+			}
+		}
+		return worst_score;
+	}
+	
+	public int avg_score(ArrayList<ReSolution> pop)
+	{
+		int sum = 0;
+		for(ReSolution rs : pop)
+		{
+			sum += rs.getBp_score();
+		}
+		return (sum/pop.size());
+	}
+	
 	public void startMutation(ArrayList<ReSolution> pop)
 	{
 		for(ReSolution rs : pop)
 		{
-			rs.mutate(this.pm);
+			rs.mutate2(this.pm);
 			calculateWeight(rs);
 		}
 	}
@@ -125,8 +149,10 @@ public class ReGeneticAlgorhytm
 	public void startAlgorhitm() throws FileNotFoundException
 	{
 		int best_score;
-//		File fil = new File("D:\\pwr\\6 semestr\\SI\\lab_1\\test." + "2" + ".csv");
-//      PrintWriter pw = new PrintWriter(fil);
+		int worst_score;
+		int avg_score;
+		File fil = new File("C:/kuba/java/workspace/re_SI_1/single/sp4-200-70-1.csv");
+		PrintWriter pw = new PrintWriter(fil);
 		GenerateFirstPopulation();
 		new_pop = new ArrayList<>();
 		for(int i = 0; i < this.iterations; i++)
@@ -155,30 +181,26 @@ public class ReGeneticAlgorhytm
 				}
 			}
 			best_score = bestScore(old_pop);
-			System.out.println("Population: " + index + " best score: " +best_score);
+			worst_score = worstScore(old_pop);
+			avg_score = avg_score(old_pop);
 			
-//			for(ReSolution xi : old_pop)
-//			{
-//				xi.DisplayBackpack();
-//			}
-			
-//			{
-//				System.out.print("score : "+xi.getBp_score()+ " weight: " + xi.getBp_weight());
-//				System.out.println();
-//			}
-//			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println("Population: " + index + " best score: " +best_score + " worst score: " + worst_score + " avg score: " + avg_score);
 			startMutation(new_pop);
 			old_pop.clear();
 			old_pop.addAll(new_pop);
-//			StringBuilder sb = new StringBuilder();
-//			sb.append(index);
-//			sb.append(",");
-//			sb.append((int)populationBestScore(old_population));
-//			sb.append('\n');
-//			pw.write(sb.toString());
+			StringBuilder sb = new StringBuilder();
+			sb.append(index);
+			sb.append(", ");
+			sb.append(best_score);
+			sb.append(", ");
+			sb.append(worst_score);
+			sb.append(", ");
+			sb.append(avg_score);
+			sb.append('\n');
+			pw.write(sb.toString());
 			new_pop.clear();
 		}
-//		pw.close();
+		pw.close();
 		
 		
 	}
