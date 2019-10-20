@@ -43,6 +43,7 @@ public class ReGeneticAlgorhytm
 //			System.out.println();
 //		}
 //		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		//gytgygyg
 	}
 	
 	public void calculateScore(ReSolution rs)
@@ -151,7 +152,7 @@ public class ReGeneticAlgorhytm
 		int best_score;
 		int worst_score;
 		int avg_score;
-		File fil = new File("C:/kuba/java/workspace/re_SI_1/single/sp4-200-70-1.csv");
+		File fil = new File("C:/kuba/java/workspace/re_SI_1/single/sp8-200-70-1.csv");
 		PrintWriter pw = new PrintWriter(fil);
 		GenerateFirstPopulation();
 		new_pop = new ArrayList<>();
