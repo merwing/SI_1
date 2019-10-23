@@ -59,6 +59,19 @@ public class ReGeneticAlgorhytm
 		rs.setBp_score(main_score);
 	}
 	
+	public void calculateScore2(ReSolution rs)
+	{
+		int main_score = 0;
+		for(int i = 0; i < rs.getBackpack().length; i++)
+		{
+			if(rs.getBackpack()[i] == 1)
+			{
+				main_score += item_list.get(i).getScore();
+			}
+		}
+		rs.setBp_score(main_score/10);
+	}
+	
 	public void calculateWeight(ReSolution rs)
 	{
 		int main_weight = 0;
@@ -78,6 +91,7 @@ public class ReGeneticAlgorhytm
 		{
 			rs.setBp_weight(main_weight);
 			rs.setBp_score(0);
+//			calculateScore2(rs);
 		}
 		
 	}
@@ -142,7 +156,7 @@ public class ReGeneticAlgorhytm
 	{
 		for(ReSolution rs : pop)
 		{
-			rs.mutate2(this.pm);
+			rs.mutate(this.pm);
 			calculateWeight(rs);
 		}
 	}
@@ -152,7 +166,7 @@ public class ReGeneticAlgorhytm
 		int best_score;
 		int worst_score;
 		int avg_score;
-		File fil = new File("C:/kuba/java/workspace/re_SI_1/single/sp8-200-70-1.csv");
+		File fil = new File("C:/kuba/java/workspace/re_SI_1/single/sprawozdanie/main/sp1_00.csv");
 		PrintWriter pw = new PrintWriter(fil);
 		GenerateFirstPopulation();
 		new_pop = new ArrayList<>();
