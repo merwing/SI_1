@@ -6,17 +6,18 @@ import java.util.Random;
 
 public class ReGeneticAlgorhytm 
 {
-	private int iterations, max_capacity, pop_size;
+	private int iterations, max_capacity, pop_size, t_size;
 	private double px, pm;
 	private ArrayList<ReItem> item_list;
 	private ArrayList<ReSolution> old_pop, new_pop;
 	private Random random = new Random();
 	
-	public ReGeneticAlgorhytm(int iterations, int pop_size, int max_capacity, double px, double pm, ArrayList<ReItem> item_list)
+	public ReGeneticAlgorhytm(int iterations, int pop_size, int max_capacity, int t_size, double px, double pm, ArrayList<ReItem> item_list)
 	{
 		this.iterations = iterations;
 		this.max_capacity = max_capacity;
 		this.pop_size = pop_size;
+		this.t_size = t_size;
 		this.px = px;
 		this.pm = pm;
 		this.item_list = item_list;
@@ -32,18 +33,6 @@ public class ReGeneticAlgorhytm
 			calculateWeight(s);
 			old_pop.add(s);
 		}
-//		for(ReSolution x : old_pop)
-//		{
-//			x.DisplayBackpack();
-//		}
-//		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-//		for(ReSolution xi : old_pop)
-//		{
-//			System.out.print("score : "+xi.getBp_score()+ " weight: " + xi.getBp_weight());
-//			System.out.println();
-//		}
-//		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		//gytgygyg
 	}
 	
 	public void calculateScore(ReSolution rs)
@@ -100,21 +89,39 @@ public class ReGeneticAlgorhytm
 	{
 		int index_1 = random.nextInt(old_pop.size());
 		int index_2 = random.nextInt(old_pop.size());
-//		int index_3 = random.nextInt(old_pop.size());
 		
 		ReSolution rs1 = old_pop.get(index_1);
 		ReSolution rs2 = old_pop.get(index_2);
 		
-		return (rs1.getBp_score() >= rs2.getBp_score() ? rs1 : rs2);}
-//		if(rs1.getBp_score() >= rs2.getBp_score())
-//		{
-//			return rs1;
-//		}
-//		else
-//		{
-//			return rs2;
-//		}
-//	}
+		return (rs1.getBp_score() >= rs2.getBp_score() ? rs1 : rs2);
+		
+	}
+	
+	public ReSolution Tournament2()
+	{
+		int index = -1;
+		int best_score = -1;
+		int actual_object_score = -1;
+		ArrayList<ReSolution> tournament_list = new ArrayList<>();
+		ReSolution rs = null;
+		for(int i = 0; i < t_size; i++)
+		{
+			index = random.nextInt(old_pop.size());
+			rs = old_pop.get(index);
+			tournament_list.add(rs);
+		}
+		for(int j = 0; j < tournament_list.size(); j++)
+		{
+			actual_object_score = tournament_list.get(j).getBp_score();
+			if(actual_object_score >= best_score)
+			{
+				best_score = actual_object_score;
+				index = j;
+			}
+		}
+		return tournament_list.get(index);
+	}
+
 	
 	public int bestScore(ArrayList<ReSolution> pop) 
 	{
@@ -166,7 +173,7 @@ public class ReGeneticAlgorhytm
 		int best_score;
 		int worst_score;
 		int avg_score;
-		File fil = new File("C:/kuba/java/workspace/re_SI_1/single/sprawozdanie/main/sp1_00.csv");
+		File fil = new File("C:/kuba/java/workspace/re_SI_1/single/sprawozdanie/sp1_test_c_m_05.csv");
 		PrintWriter pw = new PrintWriter(fil);
 		GenerateFirstPopulation();
 		new_pop = new ArrayList<>();
@@ -175,8 +182,8 @@ public class ReGeneticAlgorhytm
 			int index = i+1;
 			for(int j = 0; j < this.old_pop.size()/2; j++)
 			{
-				ReSolution p1 = Tournament();
-				ReSolution p2 = Tournament();
+				ReSolution p1 = Tournament2();
+				ReSolution p2 = Tournament2();
 				
 				int r_cross_prob = (random.nextInt(101)/100); // 0->100
 				if(r_cross_prob <= this.px)

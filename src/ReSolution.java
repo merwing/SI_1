@@ -27,8 +27,18 @@ public class ReSolution
 	public void Fill_backpack()
 	{
 		int gene = -1;
+//		int prob = -1;
 		for(int i=0; i<backpack.length; i++)
 		{
+//			prob = random.nextInt(101);
+//			if(prob <= 65)
+//			{
+//				backpack[i] = 0;
+//			}
+//			else
+//			{
+//				backpack[i] = 1;
+//			}
 			gene=random.nextInt(2);
 			backpack[i]=gene;
 		}	
