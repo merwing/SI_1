@@ -14,7 +14,7 @@ public class Main
 		int max_capacity = rl.loadMaxCapacity(file);
 		System.out.println("capacity : " + max_capacity);
 		System.out.println();
-		ReGeneticAlgorhytm ga = new ReGeneticAlgorhytm(100, 1000, max_capacity, 10, 0.7, 0.25, item_list);
+		ReGeneticAlgorithm ga = new ReGeneticAlgorithm(100, 1000, max_capacity, 10, 0.7, 0.25, item_list);
 //		ReGeneticAlgorhytm ga = new ReGeneticAlgorhytm(200, 2500, max_capacity, 2 , 0.7, 0.02, item_list);
 		ga.startAlgorhitm();
 	}

@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ReGeneticAlgorhytm 
+public class ReGeneticAlgorithm
 {
 	private int iterations, max_capacity, pop_size, t_size;
 	private double px, pm;
@@ -12,7 +12,7 @@ public class ReGeneticAlgorhytm
 	private ArrayList<ReSolution> old_pop, new_pop;
 	private Random random = new Random();
 	
-	public ReGeneticAlgorhytm(int iterations, int pop_size, int max_capacity, int t_size, double px, double pm, ArrayList<ReItem> item_list)
+	public ReGeneticAlgorithm(int iterations, int pop_size, int max_capacity, int t_size, double px, double pm, ArrayList<ReItem> item_list)
 	{
 		this.iterations = iterations;
 		this.max_capacity = max_capacity;
